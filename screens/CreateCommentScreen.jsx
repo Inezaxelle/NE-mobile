@@ -9,6 +9,23 @@ const CreateCommentScreen = ({ navigation }) => {
   const [body, setBody] = useState('');
 
   const handleCreateComment = async () => {
+    if (!postId.trim()) {
+      Alert.alert('Error', 'Post ID is required.');
+      return;
+    }
+    if (!name.trim()) {
+      Alert.alert('Error', 'Name is required.');
+      return;
+    }
+    if (!email.trim() || !/\S+@\S+\.\S+/.test(email)) {
+      Alert.alert('Error', 'A valid email is required.');
+      return;
+    }
+    if (!body.trim()) {
+      Alert.alert('Error', 'Body is required.');
+      return;
+    }
+
     try {
       const response = await axios.post('http://10.5.222.96:5000/api/comments', {
         postId: parseInt(postId), // Ensure postId is sent as an integer
@@ -17,6 +34,7 @@ const CreateCommentScreen = ({ navigation }) => {
         body
       });
       Alert.alert('Success', 'Comment created successfully!');
+      setPostId('');
       setName('');
       setEmail('');
       setBody('');

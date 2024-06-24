@@ -7,6 +7,15 @@ const CreatePostForm = () => {
   const [body, setBody] = useState('');
 
   const handleCreatePost = async () => {
+    if (!title.trim()) {
+      Alert.alert('Error', 'Title is required.');
+      return;
+    }
+    if (!body.trim()) {
+      Alert.alert('Error', 'Body is required.');
+      return;
+    }
+
     try {
       const response = await axios.post('http://10.5.222.96:5000/api/posts', {
         title,

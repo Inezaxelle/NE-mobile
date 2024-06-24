@@ -27,6 +27,7 @@ const AllPostsScreen = ({ navigation }) => {
       onPress={() => navigation.navigate('PostDetail', { postId: item.id })}
     >
       <View style={styles.postContent}>
+        <Text style={styles.title}>Post ID: {item.id}</Text>
         <Text style={styles.title}>{item.title}</Text>
         <Text>{item.body}</Text>
       </View>

@@ -55,6 +55,7 @@ const PostDetailScreen = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Post ID: {post.id}</Text>
       <Text style={styles.title}>{post.title}</Text>
       <Text style={styles.body}>{post.body}</Text>
       <View style={styles.buttonContainer}>
@@ -93,6 +94,7 @@ const styles = StyleSheet.create({
   loadingText: {
     marginTop: 10,
     fontSize: 16,
+    color: '#200020',
   },
   title: {
     fontSize: 24,
