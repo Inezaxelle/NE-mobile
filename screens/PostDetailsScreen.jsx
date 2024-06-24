@@ -6,7 +6,7 @@ const PostDetailScreen = ({ route, navigation }) => {
   const { postId } = route.params;
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
-  const [loading, setLoading] = useState(true); // State to track loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchPostDetails();
@@ -20,7 +20,7 @@ const PostDetailScreen = ({ route, navigation }) => {
     } catch (error) {
       console.error(error);
     } finally {
-      setLoading(false); // Update loading state once fetch completes
+      setLoading(false);
     }
   };
 
@@ -37,7 +37,7 @@ const PostDetailScreen = ({ route, navigation }) => {
     try {
       const response = await axios.delete(`http://10.5.222.96:5000/api/posts/${postId}`);
       Alert.alert('Success', 'Post deleted successfully!');
-      navigation.goBack(); // Navigate back after deletion
+      navigation.goBack();
     } catch (error) {
       Alert.alert('Error', 'Failed to delete post. Please try again.');
       console.error(error);
@@ -47,7 +47,7 @@ const PostDetailScreen = ({ route, navigation }) => {
   if (loading || !post) {
     return (
       <View style={[styles.container, styles.loadingContainer]}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#200020" />
         <Text style={styles.loadingText}>Loading post details...</Text>
       </View>
     );
@@ -57,8 +57,9 @@ const PostDetailScreen = ({ route, navigation }) => {
     <View style={styles.container}>
       <Text style={styles.title}>{post.title}</Text>
       <Text style={styles.body}>{post.body}</Text>
-      <Button title="Delete Post" onPress={handleDeletePost} />
-      
+      <View style={styles.buttonContainer}>
+        <Button title="Delete Post" onPress={handleDeletePost} color="#200020" />
+      </View>
       <Text style={styles.commentsTitle}>Comments:</Text>
       {comments.length === 0 ? (
         <Text style={styles.noCommentsText}>No comments associated with this post</Text>
@@ -83,6 +84,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    backgroundColor: '#f5f5f5',
   },
   loadingContainer: {
     justifyContent: 'center',
@@ -96,16 +98,21 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
+    color: '#200020',
   },
   body: {
     fontSize: 16,
     marginBottom: 20,
+  },
+  buttonContainer: {
+    marginVertical: 10,
   },
   commentsTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     marginTop: 20,
     marginBottom: 10,
+    color: '#200020',
   },
   noCommentsText: {
     fontSize: 16,
@@ -114,10 +121,11 @@ const styles = StyleSheet.create({
   },
   commentContainer: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#200020',
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
+    backgroundColor: '#fff',
   },
   commentName: {
     fontWeight: 'bold',

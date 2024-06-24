@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Alert } from 'react-native';
+import { View, TextInput, Button, Alert, StyleSheet } from 'react-native';
 import axios from 'axios';
 
 const CreateCommentScreen = ({ navigation }) => {
@@ -27,32 +27,61 @@ const CreateCommentScreen = ({ navigation }) => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <TextInput
         placeholder="Enter Post ID"
         value={postId}
         onChangeText={setPostId}
         keyboardType="numeric"
+        style={styles.input}
       />
       <TextInput
         placeholder="Enter name"
         value={name}
         onChangeText={setName}
+        style={styles.input}
       />
       <TextInput
         placeholder="Enter email"
         value={email}
         onChangeText={setEmail}
+        keyboardType="email-address"
+        style={styles.input}
       />
       <TextInput
         placeholder="Enter body"
         value={body}
         onChangeText={setBody}
         multiline
+        style={styles.input}
       />
-      <Button title="Create Comment" onPress={handleCreateComment} />
+      <View style={styles.buttonContainer}>
+        <Button title="Create Comment" onPress={handleCreateComment} color={styles.button.color} />
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: '#f5f5f5',
+  },
+  input: {
+    height: 40,
+    borderColor: '#200020',
+    borderWidth: 1,
+    marginBottom: 12,
+    paddingHorizontal: 8,
+    borderRadius: 4,
+  },
+  button: {
+    color: '#200020',
+  },
+  buttonContainer: {
+    marginTop: 12,
+  },
+});
 
 export default CreateCommentScreen;

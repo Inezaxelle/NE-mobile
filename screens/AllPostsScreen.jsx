@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const AllPostsScreen = ({ navigation }) => {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true); // State to track loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchAllPosts();
@@ -17,7 +17,7 @@ const AllPostsScreen = ({ navigation }) => {
     } catch (error) {
       console.error(error);
     } finally {
-      setLoading(false); // Update loading state once fetch completes
+      setLoading(false);
     }
   };
 
@@ -36,8 +36,16 @@ const AllPostsScreen = ({ navigation }) => {
   if (loading) {
     return (
       <View style={[styles.container, styles.loadingContainer]}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#200020" />
         <Text style={styles.loadingText}>Loading posts...</Text>
+      </View>
+    );
+  }
+
+  if (posts.length === 0) {
+    return (
+      <View style={[styles.container, styles.noPostsContainer]}>
+        <Text style={styles.noPostsText}>No Posts Available</Text>
       </View>
     );
   }
@@ -57,6 +65,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
+    backgroundColor: '#f5f5f5',
   },
   loadingContainer: {
     justifyContent: 'center',
@@ -65,12 +74,24 @@ const styles = StyleSheet.create({
   loadingText: {
     marginTop: 10,
     fontSize: 16,
+    color: '#200020',
+  },
+  noPostsContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  noPostsText: {
+    fontSize: 18,
+    color: '#200020',
   },
   postItem: {
     backgroundColor: '#fff',
     borderRadius: 5,
     marginBottom: 10,
     padding: 10,
+    borderWidth: 1,
+    borderColor: '#200020',
   },
   postContent: {
     flex: 1,
@@ -79,6 +100,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 5,
+    color: '#200020',
   },
 });
 

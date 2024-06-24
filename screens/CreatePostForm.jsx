@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Alert } from 'react-native';
+import { View, TextInput, Button, Alert, StyleSheet } from 'react-native';
 import axios from 'axios';
 
 const CreatePostForm = () => {
@@ -23,21 +23,47 @@ const CreatePostForm = () => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <TextInput
         placeholder="Enter title"
         value={title}
         onChangeText={setTitle}
+        style={styles.input}
       />
       <TextInput
         placeholder="Enter body"
         value={body}
         onChangeText={setBody}
         multiline
+        style={styles.input}
       />
-      <Button title="Create Post" onPress={handleCreatePost} />
+      <View style={styles.buttonContainer}>
+        <Button title="Create Post" onPress={handleCreatePost} color={styles.button.color} />
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: '#f5f5f5',
+  },
+  input: {
+    height: 40,
+    borderColor: '#200020',
+    borderWidth: 1,
+    marginBottom: 12,
+    paddingHorizontal: 8,
+    borderRadius: 4,
+  },
+  button: {
+    color: '#200020',
+  },
+  buttonContainer: {
+    marginTop: 12,
+  },
+});
 
 export default CreatePostForm;
